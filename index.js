@@ -1,7 +1,14 @@
-const express = require('express')
-const app = express()
-const port = 3000
+const express = require("express");
+const app = express();
+const port = 3000;
 
-app.get('/', (req, res) => res.send('Hello World!'))
+let sendStr = "init";
+if (process.env.NODE_ENV === "production") {
+  sendStr = "prod";
+} else {
+  sendStr = "dev";
+}
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+app.get("/", (req, res) => res.send("Hello World!" + sendStr));
+
+app.listen(port, () => console.log(`Example app listening on port ${port}!`));
